@@ -1,0 +1,45 @@
+name: "Automatically warm up Telegram group"
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+    - cron: '0 4 * * *'
+    - cron: '0 10 * * *'
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+
+jobs:
+  ask_meal:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    uses: ./.github/workflows/tg_sendmsg.yml
+    secrets: inherit
+    with:
+      message: "吃了吗？"
+
+  ask_breakfast:
+    if: ${{ github.event.schedule == '0 0 * * *' }}
+    uses: ./.github/workflows/tg_sendmsg.yml
+    secrets: inherit
+    with:
+      message: "早餐吃啥？"
+
+  ask_lunch:
+    if: ${{ github.event.schedule == '0 4 * * *' }}
+    uses: ./.github/workflows/tg_sendmsg.yml
+    secrets: inherit
+    with:
+      message: "午餐吃啥？"
+
+  ask_dinner:
+    if: ${{ github.event.schedule == '0 10 * * *' }}
+    uses: ./.github/workflows/tg_sendmsg.yml
+    secrets: inherit
+    with:
+      message: "晚餐吃啥？"
+
+  ask_night_snack:
+    if: ${{ github.event.schedule == '0 14 * * *' }}
+    uses: ./.github/workflows/tg_sendmsg.yml
+    secrets: inherit
+    with:
+      message: "夜宵吃啥？"

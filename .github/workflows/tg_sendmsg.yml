@@ -1,0 +1,30 @@
+name: "Send message to Telegram via apprise"
+
+on:
+  workflow_call:
+    inputs:
+      message:
+        description: Message to send
+        required: true
+        default: "Hi! This is a test message."
+        type: string
+  workflow_dispatch:
+    inputs:
+      message:
+        description: Message to send
+        required: true
+        default: "Hi! This is a test message."
+        type: string
+
+jobs:
+  sendmsg:
+    runs-on: ubuntu-latest
+    env:
+      RECEIVER_ID: ${{ secrets.TG_RECEIVER_ID }}
+      BOT_KEY: ${{ secrets.TG_BOT_KEY }}
+      MESSAGE: ${{ inputs.message }}
+    steps:
+    - name: Install Apprise and Send Message
+      run: |
+        pip install apprise
+        apprise -vv -b "$MESSAGE" "tgram://$BOT_KEY/$RECEIVER_ID"
