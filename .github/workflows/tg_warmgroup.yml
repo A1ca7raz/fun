@@ -3,9 +3,9 @@ name: "Automatically warm up Telegram group"
 on:
   schedule:
     - cron: '0 0 * * *'
-    - cron: '0 4 * * *'
-    - cron: '0 10 * * *'
-    - cron: '0 14 * * *'
+    - cron: '0 3 * * *'
+    - cron: '0 9 * * *'
+    - cron: '0 13 * * *'
   workflow_dispatch:
 
 jobs:
@@ -24,21 +24,21 @@ jobs:
       message: "早餐吃啥？"
 
   ask_lunch:
-    if: ${{ github.event.schedule == '0 4 * * *' }}
+    if: ${{ github.event.schedule == '0 3 * * *' }}
     uses: ./.github/workflows/tg_sendmsg.yml
     secrets: inherit
     with:
       message: "午餐吃啥？"
 
   ask_dinner:
-    if: ${{ github.event.schedule == '0 10 * * *' }}
+    if: ${{ github.event.schedule == '0 9 * * *' }}
     uses: ./.github/workflows/tg_sendmsg.yml
     secrets: inherit
     with:
       message: "晚餐吃啥？"
 
   ask_night_snack:
-    if: ${{ github.event.schedule == '0 14 * * *' }}
+    if: ${{ github.event.schedule == '0 13 * * *' }}
     uses: ./.github/workflows/tg_sendmsg.yml
     secrets: inherit
     with:
