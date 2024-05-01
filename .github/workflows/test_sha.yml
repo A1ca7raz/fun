@@ -1,0 +1,11 @@
+name: "Print github.sha"
+
+on: push
+
+jobs:
+  sendmsg:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print github.sha
+      run: |
+        echo "${{ github.sha }}"
